@@ -1,11 +1,19 @@
-var Block = function()
+var Frame = function()
 {
   var self = this;
   self.mesh = {};
 
-  self.init = function(){
+  self.init = function(imageName){
     self.geometry = new THREE.BoxGeometry(0.5,0.5,0.5);
-    self.material = new THREE.MeshBasicMaterial( {color: 0x025974 }  );
+    if(imageName == undefined)
+    {
+      self.material = new THREE.MeshBasicMaterial( {color: 0x025974 }  );
+    }
+    else
+    {
+      self.texture = new THREE.TextureLoader().load(imageName);
+      self.material = new THREE.MeshBasicMaterial({ map: self.texture });
+    }
     self.mesh = new THREE.Mesh( self.geometry, self.material );
   }
 
